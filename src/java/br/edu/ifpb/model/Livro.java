@@ -3,16 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.edu.ifpb.model;
+
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author IFPB
+ * @author Douglas
  */
-public class Livro {
-    
-    private int codigo;
+@Entity
+@XmlRootElement
+public class Livro implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String titulo;
     private String editora;
     private int ISBN;
@@ -26,25 +36,18 @@ public class Livro {
         this.edicao = edicao;
         this.autor = autor;
     }
-
     
-    /**
-     * @return the codigo
-     */
-    public int getCodigo() {
-        return codigo;
+    public Livro(){}
+    
+    public int getId() {
+        return id;
     }
 
-    /**
-     * @param codigo the codigo to set
-     */
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    /**
-     * @return the titulo
-     */
+ 
     public String getTitulo() {
         return titulo;
     }
@@ -111,8 +114,5 @@ public class Livro {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    
-    
-    
     
 }

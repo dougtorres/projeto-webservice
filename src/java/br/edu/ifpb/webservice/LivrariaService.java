@@ -6,6 +6,10 @@
 
 package br.edu.ifpb.webservice;
 
+import br.edu.ifpb.dao.LivrariaDAO;
+import br.edu.ifpb.dao.LivrariaFacadeREST;
+import br.edu.ifpb.model.Livraria;
+import br.edu.ifpb.model.Livro;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -20,8 +24,13 @@ public class LivrariaService {
     /**
      * This is a sample web service operation
      */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    @WebMethod(operationName = "addLivro")
+    public void addLivro(@WebParam(name = "titulo") String titulo, @WebParam(name = "editora") String editora, @WebParam(name = "isbn") int isbn, @WebParam(name = "edicao" )String edicao, @WebParam(name = "autor") String autor) {
+        Livraria nova = new Livraria("nova");
+        Livro liv = new Livro(titulo, editora, isbn, edicao, autor);
+        nova.addLivro(liv);
+        LivrariaFacadeREST dao = new LivrariaFacadeREST();
+        dao.create(nova);
+        System.out.println("Livro"+liv.getTitulo()+" Adicionado");
     }
 }
